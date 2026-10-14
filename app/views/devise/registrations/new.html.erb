@@ -1,0 +1,22 @@
+<% content_for :title, "ユーザー登録" %>
+<h1 class="mb-6 text-2xl font-semibold">ユーザー登録</h1>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "space-y-4" }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+  <div>
+    <%= f.label :email, "メールアドレス", class: "mb-1 block text-sm font-medium" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class: "w-full rounded-md border border-stone-300 px-3 py-2" %>
+  </div>
+  <div>
+    <%= f.label :password, "パスワード", class: "mb-1 block text-sm font-medium" %>
+    <%= f.password_field :password, autocomplete: "new-password", required: true, class: "w-full rounded-md border border-stone-300 px-3 py-2" %>
+    <% if @minimum_password_length %>
+      <p class="mt-1 text-xs text-stone-500"><%= @minimum_password_length %>文字以上</p>
+    <% end %>
+  </div>
+  <div>
+    <%= f.label :password_confirmation, "パスワード（確認）", class: "mb-1 block text-sm font-medium" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "w-full rounded-md border border-stone-300 px-3 py-2" %>
+  </div>
+  <%= f.submit "登録する", class: "rounded-md bg-stone-900 px-4 py-2 text-sm font-medium text-white" %>
+<% end %>
+<p class="mt-6 text-sm"><%= link_to "ログインへ", new_session_path(resource_name), class: "underline" %></p>

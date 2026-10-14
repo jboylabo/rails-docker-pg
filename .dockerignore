@@ -1,0 +1,15 @@
+.git
+.github
+.env
+.env.*
+!.env.example
+node_modules
+log/*
+tmp/*
+coverage
+.bundle
+vendor/bundle
+.DS_Store
+.idea
+.vscode
+docs
