@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title><%= content_for(:title) || "タスク学習" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= yield :head %>
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="min-h-screen bg-stone-50 text-stone-900">
+    <header class="border-b border-stone-200 bg-white">
+      <div class="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 py-4">
+        <%= link_to "タスク学習", root_path, class: "text-lg font-semibold tracking-tight" %>
+        <nav class="flex items-center gap-3 text-sm">
+          <% if user_signed_in? %>
+            <span class="hidden text-stone-500 sm:inline"><%= current_user.email %></span>
+            <%= link_to "一覧", tasks_path, class: "underline" %>
+            <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "underline" %>
+          <% else %>
+            <%= link_to "ログイン", new_user_session_path, class: "underline" %>
+            <%= link_to "ユーザー登録", new_user_registration_path, class: "underline" %>
+          <% end %>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-3xl px-4 py-8">
+      <% if notice.present? %>
+        <p class="mb-4 rounded-md bg-emerald-50 px-4 py-3 text-sm text-emerald-800"><%= notice %></p>
+      <% end %>
+      <% if alert.present? %>
+        <p class="mb-4 rounded-md bg-rose-50 px-4 py-3 text-sm text-rose-800"><%= alert %></p>
+      <% end %>
+      <%= yield %>
+    </main>
+  </body>
+</html>
